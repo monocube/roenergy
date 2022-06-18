@@ -18,7 +18,7 @@ namespace Monocube.RoEnergy.Api
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-            return new OkResult();
+            return new OkObjectResult("Hello RoEnergy API");
         }
         //TODO: get back to this later, once the Azure resources are created
         /*        [FunctionName("UpdateEnergySources")]
