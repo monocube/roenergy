@@ -32,6 +32,8 @@ public static class Energy
         var energySources = await UpdateDatabase(rows);
         return new OkObjectResult(energySources);
     }
+//Azure Static Web Apps don't yet support Timer Triggers
+/*
     [FunctionName("TimerUpdate")]
     public static async Task UpdateEnergySources(
         [TimerTrigger("0 0 * * *")] TimerInfo myTimer,
@@ -44,6 +46,7 @@ public static class Energy
         }
         await UpdateDatabase(rows);
     }
+*/
     private static async Task<Dictionary<string, IEnumerable<EnergySource>>> GetEnergySources(TableClient tableClient)
     {
         Dictionary<string, IEnumerable<EnergySource>> energies = new();
