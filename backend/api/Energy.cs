@@ -79,7 +79,7 @@ public static class Energy
         {
             querySegment = await table.ExecuteQuerySegmentedAsync(query, querySegment?.ContinuationToken);
             entities.AddRange(querySegment.Results);
-        } while (querySegment.ContinuationToken != null);
+        } while (querySegment?.ContinuationToken != null);
         var map = entities.GroupBy(x => x.PartitionKey).ToDictionary(x => x.Key, x => x.Select(x => new EnergySource
         {
             Name = x.Name,
@@ -101,7 +101,7 @@ public static class Energy
             {
                 return true;
             }
-        } while (querySegment.ContinuationToken != null);
+        } while (querySegment?.ContinuationToken != null);
         return false;
     }
     private async static Task<IEnumerable<EnergySource>> UpdateDatabase(ICollector<EnergySourceEntity> rows)
