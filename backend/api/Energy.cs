@@ -15,10 +15,14 @@ namespace Monocube.RoEnergy.Api;
 
 public static class Energy
 {
+    private const string TableName = "energies";
+    private const string ConnectionName = "RoEnergyStorage";
+    private const string EnergySourceURL = "https://www.anre.ro/ro/energie-electrica/rapoarte/puterea-instalata-in-capacitatiile-de-productie-energie-electrica";
+    private const string EnergyXPath = "//*[@id=\"container\"]/div[2]/div[1]/div/div[2]/table/tr";
     [FunctionName("GetEnergySources")]
     public static async Task<IActionResult> GetEnergySources(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "energy")] HttpRequest req,
-        [Table("energies", Connection = "RoEnergyStorage")] CloudTable table)
+        [Table(TableName, Connection = ConnectionName)] CloudTable table)
     {
         var energies = await GetEnergySources(table);
         return new OkObjectResult(energies);
@@ -26,10 +30,15 @@ public static class Energy
     [FunctionName("UpdateEnergySources")]
     public static async Task<IActionResult> Update(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "update")] HttpRequest req,
-        [Table("energies", Connection = "RoEnergyStorage")] ICollector<EnergySourceEntity> rows)
+        [Table(TableName, Connection = ConnectionName)] ICollector<EnergySourceEntity> rows,
+        [Table(TableName, Connection = ConnectionName)] CloudTable table)
     {
+        if (await EnergySourcesUpdated(table))
+        {
+            return new OkObjectResult("Already updated.");
+        }
         var energySources = await UpdateDatabase(rows);
-        return new OkObjectResult(energySources);
+        return new CreatedResult("/energy", energySources);
     }
     //Azure Static Web Apps don't yet support Timer Triggers
     /*
@@ -78,6 +87,23 @@ public static class Energy
         }));
         return map;
     }
+    private static async Task<bool> EnergySourcesUpdated(CloudTable table)
+    {
+        var today = MakeDay();
+        TableQuerySegment<EnergySourceEntity> querySegment = null;
+        var partitionKeyFilter = TableQuery.GenerateFilterCondition(nameof(ITableEntity.PartitionKey), QueryComparisons.Equal, today);
+        var rowKeyFilter = TableQuery.GenerateFilterCondition(nameof(ITableEntity.RowKey), QueryComparisons.Equal, "Solar");
+        var query = new TableQuery<EnergySourceEntity>().Where(TableQuery.CombineFilters(partitionKeyFilter, TableOperators.And, rowKeyFilter));
+        do
+        {
+            var entities = await table.ExecuteQuerySegmentedAsync(query, querySegment?.ContinuationToken);
+            if (entities.Any())
+            {
+                return true;
+            }
+        } while (querySegment.ContinuationToken != null);
+        return false;
+    }
     private async static Task<IEnumerable<EnergySource>> UpdateDatabase(ICollector<EnergySourceEntity> rows)
     {
         var html = await GetHtml();
@@ -101,13 +127,13 @@ public static class Energy
     {
         //TODO: switch to HttpClientFactory
         var client = new HttpClient();
-        return client.GetStringAsync("https://www.anre.ro/ro/energie-electrica/rapoarte/puterea-instalata-in-capacitatiile-de-productie-energie-electrica");
+        return client.GetStringAsync(EnergySourceURL);
     }
     private static IEnumerable<EnergySource> GetEnergyTypes(string html)
     {
         var htmlDoc = new HtmlDocument();
         htmlDoc.LoadHtml(html);
-        var tableRows = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"container\"]/div[2]/div[1]/div/div[2]/table/tr");
+        var tableRows = htmlDoc.DocumentNode.SelectNodes(EnergyXPath);
         List<EnergySource> data = new();
         foreach (var tableRow in tableRows)
         {
