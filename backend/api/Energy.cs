@@ -18,9 +18,9 @@ public static class Energy
     [FunctionName("GetEnergySources")]
     public static async Task<IActionResult> GetEnergySources(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "energy")] HttpRequest req,
-        [Table("energies", Connection = "RoEnergyStorage")] CloudTable tableClient)
+        [Table("energies", Connection = "RoEnergyStorage")] CloudTable table)
     {
-        var energies = await GetEnergySources(tableClient);
+        var energies = await GetEnergySources(table);
         return new OkObjectResult(energies);
     }
     [FunctionName("UpdateEnergySources")]
@@ -46,8 +46,9 @@ public static class Energy
             await UpdateDatabase(rows);
         }
     */
-    private static async Task<Dictionary<string, IEnumerable<EnergySource>>> GetEnergySources(CloudTable tableClient)
+    private static async Task<Dictionary<string, IEnumerable<EnergySource>>> GetEnergySources(CloudTable table)
     {
+        //It seems Azure hosted functions doesn't yet support the new Azure Storage SDK packages
         /*        Dictionary<string, IEnumerable<EnergySource>> energies = new();
                 List<EnergySourceEntity> allEnergies = new();
                 var energyEntities = tableClient.QueryAsync<EnergySourceEntity>();
@@ -62,7 +63,20 @@ public static class Energy
                 }));
                 return map;
         */
-        return new();
+        TableQuerySegment<EnergySourceEntity> querySegment = null;
+        var entities = new List<EnergySourceEntity>();
+        var query = new TableQuery<EnergySourceEntity>();
+        do
+        {
+            querySegment = await table.ExecuteQuerySegmentedAsync(query, querySegment?.ContinuationToken);
+            entities.AddRange(querySegment.Results);
+        } while (querySegment.ContinuationToken != null);
+        var map = entities.GroupBy(x => x.PartitionKey).ToDictionary(x => x.Key, x => x.Select(x => new EnergySource
+        {
+            Name = x.Name,
+            Capacity = x.Capacity
+        }));
+        return map;
     }
     private async static Task<IEnumerable<EnergySource>> UpdateDatabase(ICollector<EnergySourceEntity> rows)
     {
@@ -74,7 +88,6 @@ public static class Energy
             {
                 PartitionKey = MakeDay(),
                 RowKey = energySource.Name,
-                Name = energySource.Name,
                 Capacity = energySource.Capacity
             });
         };

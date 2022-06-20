@@ -1,13 +1,11 @@
 using System;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace Monocube.RoEnergy.Models;
 
-public sealed class EnergySourceEntity
+public sealed class EnergySourceEntity : TableEntity
 {
-    public string PartitionKey { get; set; }
-    public string RowKey { get; set; }
-    public DateTimeOffset? Timestamp { get; set; }
-    //public ETag ETag { get; set; }
-    public string Name { get; set; }
+    [IgnoreProperty]
+    public string Name => RowKey;
     public double Capacity { get; set; }
 }
