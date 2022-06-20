@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Monocube.RoEnergy.Api;
 
 public static class Energy
 {
+    private const string DateFormat = "yyyyMMdd";
     private const string TableName = "energies";
     private const string ConnectionName = "RoEnergyStorage";
     private const string EnergySourceURL = "https://www.anre.ro/ro/energie-electrica/rapoarte/puterea-instalata-in-capacitatiile-de-productie-energie-electrica";
@@ -25,7 +27,8 @@ public static class Energy
         [Table(TableName, Connection = ConnectionName)] CloudTable table)
     {
         var energies = await GetEnergySources(table);
-        return new OkObjectResult(energies);
+        var energyData = GetEnergyData(energies);
+        return new OkObjectResult(energyData);
     }
     [FunctionName("UpdateEnergySources")]
     public static async Task<IActionResult> Update(
@@ -55,6 +58,20 @@ public static class Energy
             await UpdateDatabase(rows);
         }
     */
+    private static IEnumerable<EnergyData> GetEnergyData(Dictionary<string, IEnumerable<EnergySource>> sources)
+    {
+        List<EnergyData> energyData = new();
+        foreach(var source in sources)
+        {
+            energyData.Add(new EnergyData
+            {
+                Date = DateTime.ParseExact(source.Key, DateFormat, CultureInfo.InvariantCulture),
+                Sources = source.Value
+            });
+        }
+        return energyData;
+    }
+
     private static async Task<Dictionary<string, IEnumerable<EnergySource>>> GetEnergySources(CloudTable table)
     {
         //It seems Azure hosted functions doesn't yet support the new Azure Storage SDK packages
@@ -110,7 +127,7 @@ public static class Energy
         var energySources = GetEnergyTypes(html);
         foreach (var energySource in energySources)
         {
-            rows.Add(new EnergySourceEntity()
+            rows.Add(new EnergySourceEntity
             {
                 PartitionKey = MakeDay(),
                 RowKey = energySource.Name,
@@ -121,7 +138,7 @@ public static class Energy
     }
     private static string MakeDay()
     {
-        return DateTime.UtcNow.ToString("yyyyMMdd");
+        return DateTime.UtcNow.ToString(DateFormat);
     }
     private static Task<string> GetHtml()
     {
@@ -141,7 +158,7 @@ public static class Energy
             {
                 var name = tableRow.ChildNodes[0].InnerText;
                 var capacity = double.Parse(tableRow.ChildNodes[1].InnerText);
-                data.Add(new EnergySource()
+                data.Add(new EnergySource
                 {
                     Name = name,
                     Capacity = capacity
