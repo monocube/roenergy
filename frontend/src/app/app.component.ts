@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EnergyService } from './services/energy.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { EnergyService } from './services/energy.service';
   providers: [EnergyService, DatePipe],
 })
 export class AppComponent implements OnInit {
+  @ViewChild('chart') chart: any;
+
   private readonly pallete = [
     '#a6cee3',
     '#1f78b4',
@@ -58,6 +60,7 @@ export class AppComponent implements OnInit {
         labels: chartLabels,
         datasets: chartDatasets,
       };
+      this.chart.refresh();
     });
   }
 }
