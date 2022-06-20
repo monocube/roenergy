@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EnergyService } from './services/energy.service';
 
 @Component({
@@ -9,8 +9,6 @@ import { EnergyService } from './services/energy.service';
   providers: [EnergyService, DatePipe],
 })
 export class AppComponent implements OnInit {
-  @ViewChild('chart') chart: any;
-
   private readonly pallete = [
     '#a6cee3',
     '#1f78b4',
@@ -27,32 +25,50 @@ export class AppComponent implements OnInit {
   ];
 
   energyData: any;
-  constructor(private energyService: EnergyService, public datepipe: DatePipe) {}
+  options: any;
+  constructor(private energyService: EnergyService, public datepipe: DatePipe) {
+    this.options = {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (item: any) => `${item.dataset.label}: ${item.raw.toFixed(3)} MW`,
+          },
+        },
+      },
+    };
+  }
   ngOnInit() {
     this.energyService.getData().subscribe((data) => {
       let chartLabels: any = [];
-      let datasets = new Map<string, Number[]>();
+      let datasets = new Map<string, number[]>();
+      let totalCapacity: number = 0;
       data.map((energyData) => {
-        chartLabels.push(this.datepipe.transform(new Date(energyData.date), 'dd-MMM-yyyy'));
+        chartLabels.push(
+          this.datepipe.transform(new Date(energyData.date), 'dd-MMM-yyyy')
+        );
         energyData.sources.map((source) => {
-          let capacities = [];
+          totalCapacity += source.capacity;
+          let capacities: any = [];
           if (datasets.has(source.name)) {
             capacities = datasets.get(source.name)!;
-            capacities.push(source.capacity);
-            datasets.set(source.name, capacities);
-          } else {
-            capacities.push(source.capacity);
-            datasets.set(source.name, capacities);
           }
+          capacities.push(source.capacity);
+          datasets.set(source.name, capacities);
         });
       });
-      const chartDatasets: any = [];
+      const chartDatasets: any = [
+        {
+          label: 'Total',
+          data: [totalCapacity],
+          borderColor: this.pallete[0],
+          tension: 0.4,
+        },
+      ];
       [...datasets.entries()].forEach(([key, value], index) => {
         chartDatasets.push({
           label: key,
           data: value,
-          fill: false,
-          borderColor: this.pallete[index],
+          borderColor: this.pallete[index + 1],
           tension: 0.4,
         });
       });
@@ -60,7 +76,6 @@ export class AppComponent implements OnInit {
         labels: chartLabels,
         datasets: chartDatasets,
       };
-      this.chart.refresh();
     });
   }
 }

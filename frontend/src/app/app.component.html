@@ -1,4 +1,10 @@
-<p-panel header="Romanian Energy Generation Capacity">
-  <p-chart #chart type="line" [data]="energyData" [responsive]="true"></p-chart>
+<p-panel header="Romanian Energy Generation Capacity [MW]">
+  <p-chart
+    #chart
+    type="line"
+    [data]="energyData"
+    [responsive]="true"
+    [options]="options"
+  ></p-chart>
 </p-panel>
 <router-outlet></router-outlet>
