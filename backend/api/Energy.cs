@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Azure.Data.Tables;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
 using Monocube.RoEnergy.Models;
 
 namespace Monocube.RoEnergy.Api;
@@ -19,7 +18,7 @@ public static class Energy
     [FunctionName("GetEnergySources")]
     public static async Task<IActionResult> GetEnergySources(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "energy")] HttpRequest req,
-        [Table("energies", Connection = "RoEnergyStorage")] TableClient tableClient)
+        [Table("energies", Connection = "RoEnergyStorage")] CloudTable tableClient)
     {
         var energies = await GetEnergySources(tableClient);
         return new OkObjectResult(energies);
@@ -32,36 +31,38 @@ public static class Energy
         var energySources = await UpdateDatabase(rows);
         return new OkObjectResult(energySources);
     }
-//Azure Static Web Apps don't yet support Timer Triggers
-/*
-    [FunctionName("TimerUpdate")]
-    public static async Task UpdateEnergySources(
-        [TimerTrigger("0 0 * * *")] TimerInfo myTimer,
-        ILogger log,
-        [Table("energies", Connection = "RoEnergyStorage")] ICollector<EnergySourceEntity> rows)
-    {
-        if (myTimer.IsPastDue)
+    //Azure Static Web Apps don't yet support Timer Triggers
+    /*
+        [FunctionName("TimerUpdate")]
+        public static async Task UpdateEnergySources(
+            [TimerTrigger("0 0 * * *")] TimerInfo myTimer,
+            ILogger log,
+            [Table("energies", Connection = "RoEnergyStorage")] ICollector<EnergySourceEntity> rows)
         {
-            log.LogWarning("Timer is past due");
+            if (myTimer.IsPastDue)
+            {
+                log.LogWarning("Timer is past due");
+            }
+            await UpdateDatabase(rows);
         }
-        await UpdateDatabase(rows);
-    }
-*/
-    private static async Task<Dictionary<string, IEnumerable<EnergySource>>> GetEnergySources(TableClient tableClient)
+    */
+    private static async Task<Dictionary<string, IEnumerable<EnergySource>>> GetEnergySources(CloudTable tableClient)
     {
-        Dictionary<string, IEnumerable<EnergySource>> energies = new();
-        List<EnergySourceEntity> allEnergies = new();
-        var energyEntities = tableClient.QueryAsync<EnergySourceEntity>();
-        await foreach (var page in energyEntities.AsPages())
-        {
-            allEnergies.AddRange(page.Values);
-        }
-        var map = allEnergies.GroupBy(x => x.PartitionKey).ToDictionary(x => x.Key, x => x.Select(x => new EnergySource
-        {
-            Name = x.Name,
-            Capacity = x.Capacity
-        }));
-        return map;
+        /*        Dictionary<string, IEnumerable<EnergySource>> energies = new();
+                List<EnergySourceEntity> allEnergies = new();
+                var energyEntities = tableClient.QueryAsync<EnergySourceEntity>();
+                await foreach (var page in energyEntities.AsPages())
+                {
+                    allEnergies.AddRange(page.Values);
+                }
+                var map = allEnergies.GroupBy(x => x.PartitionKey).ToDictionary(x => x.Key, x => x.Select(x => new EnergySource
+                {
+                    Name = x.Name,
+                    Capacity = x.Capacity
+                }));
+                return map;
+        */
+        return new();
     }
     private async static Task<IEnumerable<EnergySource>> UpdateDatabase(ICollector<EnergySourceEntity> rows)
     {
