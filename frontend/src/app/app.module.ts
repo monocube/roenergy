@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChartModule } from 'primeng/chart';
+import {Panel, PanelModule} from 'primeng/panel';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
     ChartModule,
+    PanelModule
   ],
   providers: [],
   bootstrap: [AppComponent],
