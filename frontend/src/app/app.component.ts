@@ -31,7 +31,8 @@ export class AppComponent implements OnInit {
       plugins: {
         tooltip: {
           callbacks: {
-            label: (item: any) => `${item.dataset.label}: ${item.raw.toFixed(3)} MW`,
+            label: (item: any) =>
+              `${item.dataset.label}: ${item.raw.toFixed(3)} MW`,
           },
         },
       },
@@ -41,8 +42,16 @@ export class AppComponent implements OnInit {
     this.energyService.getData().subscribe((data) => {
       let chartLabels: any = [];
       let datasets = new Map<string, number[]>();
-      let totalCapacity: number = 0;
+      const chartDatasets: any = [
+        {
+          label: 'Total',
+          data: [],
+          borderColor: this.pallete[0],
+          tension: 0.4,
+        },
+      ];
       data.map((energyData) => {
+        let totalCapacity: number = 0;
         chartLabels.push(
           this.datepipe.transform(new Date(energyData.date), 'dd-MMM-yyyy')
         );
@@ -55,15 +64,8 @@ export class AppComponent implements OnInit {
           capacities.push(source.capacity);
           datasets.set(source.name, capacities);
         });
+        chartDatasets[0].data.push(totalCapacity);
       });
-      const chartDatasets: any = [
-        {
-          label: 'Total',
-          data: [totalCapacity],
-          borderColor: this.pallete[0],
-          tension: 0.4,
-        },
-      ];
       [...datasets.entries()].forEach(([key, value], index) => {
         chartDatasets.push({
           label: key,
