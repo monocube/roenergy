@@ -1,6 +1,10 @@
 import { DatePipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { SeverityLevel } from '@microsoft/applicationinsights-web';
+import { IEnergyData } from './models/energy-data';
 import { EnergyService } from './services/energy.service';
+import { InsightsService } from './services/insights.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +31,11 @@ export class AppComponent implements OnInit {
 
   energyData: any;
   options: any;
-  constructor(private energyService: EnergyService, public datepipe: DatePipe) {
+  constructor(
+    private energyService: EnergyService,
+    private insightsService: InsightsService,
+    private datepipe: DatePipe
+  ) {
     this.options = {
       plugins: {
         tooltip: {
@@ -40,45 +48,57 @@ export class AppComponent implements OnInit {
     };
   }
   ngOnInit() {
-    this.energyService.getData().subscribe((data) => {
-      let chartLabels: any = [];
-      let datasets = new Map<string, number[]>();
-      const chartDatasets: any = [
-        {
-          label: 'Total',
-          data: [],
-          borderColor: this.pallete[0],
-          tension: 0.4,
-        },
-      ];
-      data.map((energyData) => {
-        let totalCapacity: number = 0;
-        chartLabels.push(
-          this.datepipe.transform(new Date(energyData.date), 'dd-MMM-yyyy')
-        );
-        energyData.sources.map((source) => {
-          totalCapacity += source.capacity;
-          let capacities: any = [];
-          if (datasets.has(source.name)) {
-            capacities = datasets.get(source.name)!;
-          }
-          capacities.push(source.capacity);
-          datasets.set(source.name, capacities);
+    this.energyService.getData().subscribe({
+      next: (data) => {
+        this.processData(data);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.insightsService.trackTrace({
+          message: error.message,
+          severityLevel: SeverityLevel.Error,
         });
-        chartDatasets[0].data.push(totalCapacity);
-      });
-      [...datasets.entries()].forEach(([key, value], index) => {
-        chartDatasets.push({
-          label: key,
-          data: value,
-          borderColor: this.pallete[index + 1],
-          tension: 0.4,
-        });
-      });
-      this.energyData = {
-        labels: chartLabels,
-        datasets: chartDatasets,
-      };
+      },
     });
+  }
+
+  private processData(data: IEnergyData[]) {
+    let chartLabels: any = [];
+    let datasets = new Map<string, number[]>();
+    const chartDatasets: any = [
+      {
+        label: 'Total',
+        data: [],
+        borderColor: this.pallete[0],
+        tension: 0.4,
+      },
+    ];
+    data.map((energyData) => {
+      let totalCapacity: number = 0;
+      chartLabels.push(
+        this.datepipe.transform(new Date(energyData.date), 'dd-MMM-yyyy')
+      );
+      energyData.sources.map((source) => {
+        totalCapacity += source.capacity;
+        let capacities: any = [];
+        if (datasets.has(source.name)) {
+          capacities = datasets.get(source.name)!;
+        }
+        capacities.push(source.capacity);
+        datasets.set(source.name, capacities);
+      });
+      chartDatasets[0].data.push(totalCapacity);
+    });
+    [...datasets.entries()].forEach(([key, value], index) => {
+      chartDatasets.push({
+        label: key,
+        data: value,
+        borderColor: this.pallete[index + 1],
+        tension: 0.4,
+      });
+    });
+    this.energyData = {
+      labels: chartLabels,
+      datasets: chartDatasets,
+    };
   }
 }

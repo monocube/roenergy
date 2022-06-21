@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   googleTagManagerCode: 'GTM-5S2TJ6M',
-  apiURL: 'http://localhost:7071/api/energy'
+  apiURL: 'http://localhost:7071/api/energy',
+  appInsights: {
+    instrumentationKey: 'bdb75c21-2987-4954-be6a-3024e23696d9',
+  },
 };
 
 /*

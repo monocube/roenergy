@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -8,6 +8,8 @@ import { GoogleTagManagerComponent } from './components/google-tag-manager.compo
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { HttpClientModule } from '@angular/common/http';
+import { InsightsService } from './services/insights.service';
+import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
 
 @NgModule({
   declarations: [AppComponent, GoogleTagManagerComponent],
@@ -19,7 +21,13 @@ import { HttpClientModule } from '@angular/common/http';
     ChartModule,
     PanelModule,
   ],
-  providers: [],
+  providers: [
+    InsightsService,
+    {
+      provide: ErrorHandler,
+      useClass: ApplicationinsightsAngularpluginErrorService,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
