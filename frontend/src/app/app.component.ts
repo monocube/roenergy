@@ -9,6 +9,7 @@ import { EnergyService } from './services/energy.service';
   providers: [EnergyService, DatePipe],
 })
 export class AppComponent implements OnInit {
+  title = 'RoEnergy';
   private readonly pallete = [
     '#a6cee3',
     '#1f78b4',

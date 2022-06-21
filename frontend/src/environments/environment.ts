@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  googleTagManagerCode: 'GTM-5S2TJ6M',
+  apiURL: 'http://localhost:7071/api/energy'
 };
 
 /*
