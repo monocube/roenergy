@@ -29,8 +29,9 @@ export class AppComponent implements OnInit {
     '#b15928',
   ];
 
-  energyData: any;
+  energyData: any = null;
   options: any;
+
   constructor(
     private energyService: EnergyService,
     private insightsService: InsightsService,
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit {
       },
     };
   }
+
   ngOnInit() {
     this.energyService.getData().subscribe({
       next: (data) => {
@@ -93,7 +95,7 @@ export class AppComponent implements OnInit {
         label: key,
         data: value,
         borderColor: this.pallete[index + 1],
-        tension: 0.4,
+        tension: 0,
       });
     });
     this.energyData = {

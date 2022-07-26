@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { GoogleTagManagerComponent } from './components/google-tag-manager.component';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { HttpClientModule } from '@angular/common/http';
 import { InsightsService } from './services/insights.service';
 import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
@@ -20,6 +21,7 @@ import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applica
     HttpClientModule,
     ChartModule,
     PanelModule,
+    ProgressSpinnerModule,
   ],
   providers: [
     InsightsService,

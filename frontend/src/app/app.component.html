@@ -1,6 +1,7 @@
 <app-google-tag-manager></app-google-tag-manager>
 <p-panel header="Romanian Energy Generation Capacity [MW]">
-  <p-chart
+  <p-progressSpinner *ngIf="!energyData"></p-progressSpinner>
+  <p-chart *ngIf="energyData"
     #chart
     type="line"
     [data]="energyData"
@@ -10,6 +11,7 @@
   ></p-chart>
   <ng-template pTemplate="footer">
     <div>Data scraped daily from <a href="https://www.anre.ro/ro/energie-electrica/rapoarte/puterea-instalata-in-capacitatiile-de-productie-energie-electrica" target="_blank">ANRE</a>.</div>
+    <span>You can click on an energy source in the chart legend to enable/disable its display.</span><br/>
     <span>Copyright &copy;2022 monocube.com. Source available at <a href="https://github.com/monocube/roenergy" target="_blank">GitHub</a>.</span>
 </ng-template>
 </p-panel>
