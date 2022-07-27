@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
         label: 'Total',
         data: [],
         borderColor: this.pallete[0],
-        tension: 0.4,
+        tension: 0,
       },
     ];
     data.map((energyData) => {
