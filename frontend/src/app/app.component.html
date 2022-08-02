@@ -1,7 +1,9 @@
 <app-google-tag-manager></app-google-tag-manager>
 <p-panel header="Romanian Energy Generation Capacity [MW]">
   <p-progressSpinner *ngIf="!energyData"></p-progressSpinner>
-  <p-chart *ngIf="energyData"
+  <div>Growth since reporting started: {{ totalGrowth | percent:'1.2-5' }}</div>
+  <p-chart
+    *ngIf="energyData"
     #chart
     type="line"
     [data]="energyData"
@@ -10,9 +12,25 @@
     height="80vh"
   ></p-chart>
   <ng-template pTemplate="footer">
-    <div>Data scraped daily from <a href="https://www.anre.ro/ro/energie-electrica/rapoarte/puterea-instalata-in-capacitatiile-de-productie-energie-electrica" target="_blank">ANRE</a>.</div>
-    <span>You can click on an energy source in the chart legend to enable/disable its display.</span><br/>
-    <span>Developed by Mircea Ril&#259;. Copyright &copy;2022 <a href="https://www.monocube.com" title="monocube.com">monocube.com</a>. Source available at <a href="https://github.com/monocube/roenergy" target="_blank">GitHub</a>.</span>
-</ng-template>
+    <div>
+      Data scraped daily from
+      <a
+        href="https://www.anre.ro/ro/energie-electrica/rapoarte/puterea-instalata-in-capacitatiile-de-productie-energie-electrica"
+        target="_blank"
+        >ANRE</a
+      >.
+    </div>
+    <span
+      >You can click on an energy source in the chart legend to enable/disable
+      its display.</span
+    ><br />
+    <span
+      >Developed by Mircea Ril&#259;. Copyright &copy;2022
+      <a href="https://www.monocube.com" title="monocube.com">monocube.com</a>.
+      Source available at
+      <a href="https://github.com/monocube/roenergy" target="_blank">GitHub</a
+      >.</span
+    >
+  </ng-template>
 </p-panel>
 <router-outlet></router-outlet>

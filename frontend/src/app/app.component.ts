@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
 
   energyData: any = null;
   options: any;
+  totalGrowth: number = 0;
 
   constructor(
     private energyService: EnergyService,
@@ -74,7 +75,8 @@ export class AppComponent implements OnInit {
         tension: 0,
       },
     ];
-    data.map((energyData) => {
+    let initialTotalCapacity = 0;
+    data.map((energyData, index, energyDataArray) => {
       let totalCapacity: number = 0;
       chartLabels.push(
         this.datepipe.transform(new Date(energyData.date), 'dd-MMM-yyyy')
@@ -89,6 +91,12 @@ export class AppComponent implements OnInit {
         datasets.set(source.name, capacities);
       });
       chartDatasets[0].data.push(totalCapacity);
+      if (index === 0) {
+        initialTotalCapacity = totalCapacity;
+      } else if (index === energyDataArray.length - 1) {
+        this.totalGrowth =
+          (totalCapacity - initialTotalCapacity) / initialTotalCapacity;
+      }
     });
     [...datasets.entries()].forEach(([key, value], index) => {
       chartDatasets.push({
