@@ -5,7 +5,10 @@ import { SeverityLevel } from '@microsoft/applicationinsights-web';
 import { IEnergyData } from './models/energy-data';
 import { EnergyService } from './services/energy.service';
 import { InsightsService } from './services/insights.service';
-
+export interface IGrowth{
+  percent: number,
+  absolute: number
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -28,11 +31,11 @@ export class AppComponent implements OnInit {
     '#ffff99',
     '#b15928',
   ];
-
   energyData: any = null;
   options: any;
   totalGrowth: number = 0;
-  totalGrowths: Map<string, number> = new Map<string, number>();
+  totalGrowthMW: number = 0;
+  totalGrowths: Map<string, IGrowth> = new Map<string, IGrowth>();
 
   constructor(
     private energyService: EnergyService,
@@ -97,6 +100,7 @@ export class AppComponent implements OnInit {
       } else if (index === energyDataArray.length - 1) {
         this.totalGrowth =
           (totalCapacity - initialTotalCapacity) / initialTotalCapacity;
+        this.totalGrowthMW = totalCapacity - initialTotalCapacity;
       }
     });
     [...datasets.entries()].forEach(([key, value], index) => {
@@ -111,10 +115,10 @@ export class AppComponent implements OnInit {
         if (i === 0) {
           initialCapacity = capacity;
         } else if (i === values.length - 1) {
-          this.totalGrowths.set(
-            key,
-            (capacity - initialCapacity) / initialCapacity
-          );
+          this.totalGrowths.set(key, {
+            percent: (capacity - initialCapacity) / initialCapacity,
+            absolute: capacity - initialCapacity,
+          });
         }
       });
     });
