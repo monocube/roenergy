@@ -1,7 +1,14 @@
 <app-google-tag-manager></app-google-tag-manager>
 <p-panel header="Romanian Energy Generation Capacity [MW]">
   <p-progressSpinner *ngIf="!energyData"></p-progressSpinner>
-  <div>Growth since reporting started: {{ totalGrowth | percent:'1.2-5' }}</div>
+  <h4>Growth since reported started</h4>
+  <div *ngFor="let item of totalGrowths | keyvalue">
+    {{ item.key }}:
+    <span
+      [class]="item.value > 0 ? 'text-green-500': ''">{{ item.value | percent: "1.2-5" }}</span
+    >
+  </div>
+  <div>Total: {{ totalGrowth | percent: "1.2-5" }}</div>
   <p-chart
     *ngIf="energyData"
     #chart

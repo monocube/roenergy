@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
   energyData: any = null;
   options: any;
   totalGrowth: number = 0;
+  totalGrowths: Map<string, number> = new Map<string, number>();
 
   constructor(
     private energyService: EnergyService,
@@ -104,6 +105,17 @@ export class AppComponent implements OnInit {
         data: value,
         borderColor: this.pallete[index + 1],
         tension: 0,
+      });
+      let initialCapacity = 0;
+      value.forEach((capacity, i, values) => {
+        if (i === 0) {
+          initialCapacity = capacity;
+        } else if (i === values.length - 1) {
+          this.totalGrowths.set(
+            key,
+            (capacity - initialCapacity) / initialCapacity
+          );
+        }
       });
     });
     this.energyData = {
