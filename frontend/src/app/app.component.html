@@ -4,11 +4,16 @@
   <h4>Growth since reported started</h4>
   <div *ngFor="let item of totalGrowths | keyvalue">
     {{ item.key }}:
-    <span
-      [class]="item.value > 0 ? 'text-green-500': ''">{{ item.value | percent: "1.2-5" }}</span
-    >
+    <span [class]="item.value > 0 ? 'text-green-500' : ''">{{
+      item.value | percent: "1.2-5"
+    }}</span>
   </div>
-  <div>Total: {{ totalGrowth | percent: "1.2-5" }}</div>
+  <div>
+    Total:
+    <span [class]="totalGrowth > 0 ? 'text-green-500' : ''">{{
+      totalGrowth | percent: "1.2-5"
+    }}</span>
+  </div>
   <p-chart
     *ngIf="energyData"
     #chart
