@@ -1,68 +1,53 @@
-<app-google-tag-manager></app-google-tag-manager>
-<p-panel header="Romanian Energy Generation Capacity [MW]">
+<p-panel header="Romanian Energy Generation Capacity [MW]" styleClass="p-2">
   <p-progressSpinner *ngIf="!energyData"></p-progressSpinner>
-  <h4>Growth since reported started</h4>
+  <h1 class="text-xl">Growth since reported started</h1>
   <div *ngFor="let item of totalGrowths | keyvalue">
     {{ item.key }}:
-    <span
-      [class]="
+    <span [class]="
         item.value.percent < 0
           ? 'text-red-500'
           : item.value.percent > 0
           ? 'text-green-500'
           : ''
-      "
-      >{{ item.value.percent | percent: "1.2-5" }} ({{
-        item.value.absolute | number: "1.2-2"
+      ">{{ item.value.percent | percent: "1.2-5" }} ({{
+      item.value.absolute | number: "1.2-2"
       }}
-      MW)</span
-    >
+      MW)</span>
   </div>
   <div>
     Total:
-    <span
-      [class]="
+    <span [class]="
         totalGrowth < 0
           ? 'text-red-500'
           : totalGrowth > 0
           ? 'text-green-500'
           : ''
-      "
-      >{{ totalGrowth | percent: "1.2-5" }} ({{
-        totalGrowthMW | number: "1.2-2"
+      ">{{ totalGrowth | percent: "1.2-5" }} ({{
+      totalGrowthMW | number: "1.2-2"
       }}
-      MW)</span
-    >
+      MW)</span>
   </div>
-  <p-chart
-    *ngIf="energyData"
-    #chart
-    type="line"
-    [data]="energyData"
-    [responsive]="true"
-    [options]="options"
-    height="80vh"
-  ></p-chart>
+  <p-chart *ngIf="energyData" #chart type="line" [data]="energyData" [responsive]="true" [options]="options"
+    height="80vh"></p-chart>
   <ng-template pTemplate="footer">
     <div>
       Data scraped daily from
-      <a
-        href="https://www.anre.ro/ro/energie-electrica/rapoarte/puterea-instalata-in-capacitatiile-de-productie-energie-electrica"
-        target="_blank"
-        >ANRE</a
-      >.
+      <a href="https://www.anre.ro/ro/energie-electrica/rapoarte/puterea-instalata-in-capacitatiile-de-productie-energie-electrica"
+        target="_blank">ANRE</a>.
     </div>
-    <span
-      >You can click on an energy source in the chart legend to enable/disable
-      its display.</span
-    ><br />
-    <span
-      >Developed by Mircea Ril&#259;. Copyright &copy;2022
+    <div>You can click on an energy source in the chart legend to enable/disable
+      its display.</div>
+    <div>Built in public by <a href="https://www.twitter.com/zaWasp"><i
+          class="pi pi-twitter">@zaWasp</i></a>
+    </div>
+    <div>
+      Copyright &copy;2022-2023
       <a href="https://www.monocube.com" title="monocube.com">monocube.com</a>.
+    </div>
+    <span>
       Source available at
-      <a href="https://github.com/monocube/roenergy" target="_blank">GitHub</a
-      >.</span
-    >
+      <a href="https://github.com/monocube/roenergy" target="_blank">GitHub</a>.
+    </span>
   </ng-template>
 </p-panel>
 <router-outlet></router-outlet>

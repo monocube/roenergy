@@ -30,6 +30,6 @@ import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applica
       useClass: ApplicationinsightsAngularpluginErrorService,
     },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, GoogleTagManagerComponent],
 })
 export class AppModule {}
