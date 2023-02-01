@@ -25,9 +25,9 @@
     "chart.js": "^4.2.0",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
-    "primeng": "^15.1.0",
+    "primeng": "^15.2.0",
     "rxjs": "^7.8.0",
-    "tslib": "^2.4.1",
+    "tslib": "^2.5.0",
     "zone.js": "^0.12.0"
   },
   "devDependencies": {
@@ -43,6 +43,6 @@
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
     "purgecss-webpack-plugin": "^5.0.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }
