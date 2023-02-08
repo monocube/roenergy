@@ -13,11 +13,11 @@ specifiers:
   '@angular/platform-browser': ^15.1.3
   '@angular/platform-browser-dynamic': ^15.1.3
   '@angular/router': ^15.1.3
-  '@microsoft/applicationinsights-analytics-js': ^2.8.5
-  '@microsoft/applicationinsights-angularplugin-js': ^3.0.0
-  '@microsoft/applicationinsights-web': ^2.8.9
+  '@microsoft/applicationinsights-analytics-js': ^2.8.10
+  '@microsoft/applicationinsights-angularplugin-js': ^3.0.1
+  '@microsoft/applicationinsights-web': ^2.8.10
   '@types/jasmine': ^4.3.1
-  '@types/node': ^18.11.19
+  '@types/node': ^18.13.0
   chart.js: ^4.2.0
   jasmine-core: ^4.5.0
   karma: ^6.4.1
@@ -43,10 +43,10 @@ dependencies:
   '@angular/platform-browser': 15.1.3_bjrq5ug2dzvjea7bcoozclkliu
   '@angular/platform-browser-dynamic': 15.1.3_g73y6grxaixjsu7lthh2v6wd74
   '@angular/router': 15.1.3_ldllaezapbozgxcjenczigqhsy
-  '@microsoft/applicationinsights-analytics-js': 2.8.9_tslib@2.5.0
-  '@microsoft/applicationinsights-angularplugin-js': 3.0.0_xzstcqa7spiwdoptmgze2k4jli
-  '@microsoft/applicationinsights-web': 2.8.9_tslib@2.5.0
-  '@types/node': 18.11.19
+  '@microsoft/applicationinsights-analytics-js': 2.8.10_tslib@2.5.0
+  '@microsoft/applicationinsights-angularplugin-js': 3.0.1_toow35pbbut4rqv3bzoddyusrm
+  '@microsoft/applicationinsights-web': 2.8.10_tslib@2.5.0
+  '@types/node': 18.13.0
   chart.js: 4.2.0
   primeflex: 3.3.0
   primeicons: 6.0.1
@@ -56,7 +56,7 @@ dependencies:
   zone.js: 0.12.0
 
 devDependencies:
-  '@angular-builders/custom-webpack': 15.0.0_65akdsbplnu7tp6jaeaml5cwbq
+  '@angular-builders/custom-webpack': 15.0.0_4bop24edfhl4f62jgaebopluly
   '@angular-devkit/build-angular': 15.1.4_ghxqtropjkuqoqj6aexbk5frmm
   '@angular/cli': 15.1.4
   '@angular/compiler-cli': 15.1.3_4khyt5yocueaoa5yhnzf5rhw64
@@ -80,7 +80,7 @@ packages:
       '@jridgewell/trace-mapping': 0.3.17
     dev: true
 
-  /@angular-builders/custom-webpack/15.0.0_65akdsbplnu7tp6jaeaml5cwbq:
+  /@angular-builders/custom-webpack/15.0.0_4bop24edfhl4f62jgaebopluly:
     resolution: {integrity: sha512-i8ZQ7rJ+RTy73MivvIdNAa8sZpiDy9wHBetAEyYSlGtjaSB3lntEFtBw9edfyRkpbifw53QA/N5haOwox987/Q==}
     engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0}
     peerDependencies:
@@ -91,7 +91,7 @@ packages:
       '@angular-devkit/core': 15.1.2
       '@angular/compiler-cli': 15.1.3_4khyt5yocueaoa5yhnzf5rhw64
       lodash: 4.17.21
-      ts-node: 10.9.1_qqdszkrtcshgbphghj7vnvrrby
+      ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
       tsconfig-paths: 4.1.2
       webpack-merge: 5.8.0
     transitivePeerDependencies:
@@ -1992,60 +1992,60 @@ packages:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
     dev: true
 
-  /@microsoft/applicationinsights-analytics-js/2.8.9_tslib@2.5.0:
-    resolution: {integrity: sha512-7Mu1vJQe2RUFuMXSmQqqk/pzqk0HoWnDH297trDdXPSDgU40YXTp+E5PWD9qoVUnhftb2LYKSL9HlWIBn705eg==}
+  /@microsoft/applicationinsights-analytics-js/2.8.10_tslib@2.5.0:
+    resolution: {integrity: sha512-JugJ3oXnKZuxeJSsFYNKyGiwaQ5Or5Z8n6aGiyngi38QJ/wcbiI9p71gK1dntJ6V2hB78zhbXvUim9TLXagfbQ==}
     peerDependencies:
       tslib: '*'
     dependencies:
-      '@microsoft/applicationinsights-common': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-core-js': 2.8.9_tslib@2.5.0
+      '@microsoft/applicationinsights-common': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-core-js': 2.8.10_tslib@2.5.0
       '@microsoft/applicationinsights-shims': 2.0.2
       '@microsoft/dynamicproto-js': 1.1.7
       tslib: 2.5.0
     dev: false
 
-  /@microsoft/applicationinsights-angularplugin-js/3.0.0_xzstcqa7spiwdoptmgze2k4jli:
-    resolution: {integrity: sha512-Awh8bw0FnnTepraxJ8gDBc47clWfxwGWQ1VWl9ZcQgeDq2NoM5VtQ6/NqA83ET+9aLDUTDXUDz+sRDHSh2sxIQ==}
+  /@microsoft/applicationinsights-angularplugin-js/3.0.1_toow35pbbut4rqv3bzoddyusrm:
+    resolution: {integrity: sha512-eDAt8YGs7pL65co2xG2wquRC3GBbKST5mjuTQqL8hJoRw/+Q5WDH25XN1PxJC+ARsgVECdJgjiksjE7RyrMazQ==}
     peerDependencies:
       '@angular/common': '>= 14.0.3'
       '@angular/core': '>= 14.0.3'
-      '@microsoft/applicationinsights-analytics-js': ^2.8.5
+      '@microsoft/applicationinsights-analytics-js': ^2.8.10
     dependencies:
       '@angular/common': 15.1.3_e5k2npugnvd34secg4d53mkdom
       '@angular/core': 15.1.3_rxjs@7.8.0+zone.js@0.12.0
-      '@microsoft/applicationinsights-analytics-js': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-common': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-core-js': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-properties-js': 2.8.9_tslib@2.5.0
+      '@microsoft/applicationinsights-analytics-js': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-common': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-core-js': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-properties-js': 2.8.10_tslib@2.5.0
       '@microsoft/applicationinsights-shims': 2.0.2
       tslib: 2.5.0
     dev: false
 
-  /@microsoft/applicationinsights-channel-js/2.8.9_tslib@2.5.0:
-    resolution: {integrity: sha512-fMBsAEB7pWtPn43y72q9Xy5E5y55r6gMuDQqRRccccVoQDPXyS57VCj5IdATblctru0C6A8XpL2vRyNmEsu0Vg==}
+  /@microsoft/applicationinsights-channel-js/2.8.10_tslib@2.5.0:
+    resolution: {integrity: sha512-jXEUw3+U6WABygDOjEIlCLsniUpPqH5d/1Rfj1MVWMW6FFZo1vvYZoziOqb+dWWn41Dn5GF4EgXnvsfdkpz29w==}
     peerDependencies:
       tslib: '*'
     dependencies:
-      '@microsoft/applicationinsights-common': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-core-js': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-shims': 2.0.2
-      '@microsoft/dynamicproto-js': 1.1.7
-      tslib: 2.5.0
-    dev: false
-
-  /@microsoft/applicationinsights-common/2.8.9_tslib@2.5.0:
-    resolution: {integrity: sha512-mObn1moElyxZaGIRF/IU3cOaeKMgxghXnYEoHNUCA2e+rNwBIgxjyKkblFIpmGuHf4X7Oz3o3yBWpaC6AoMpig==}
-    peerDependencies:
-      tslib: '*'
-    dependencies:
-      '@microsoft/applicationinsights-core-js': 2.8.9_tslib@2.5.0
+      '@microsoft/applicationinsights-common': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-core-js': 2.8.10_tslib@2.5.0
       '@microsoft/applicationinsights-shims': 2.0.2
       '@microsoft/dynamicproto-js': 1.1.7
       tslib: 2.5.0
     dev: false
 
-  /@microsoft/applicationinsights-core-js/2.8.9_tslib@2.5.0:
-    resolution: {integrity: sha512-HRuIuZ6aOWezcg/G5VyFDDWGL8hDNe/ljPP01J7ImH2kRPEgbtcfPSUMjkamGMefgdq81GZsSoC/NNGTP4pp2w==}
+  /@microsoft/applicationinsights-common/2.8.10_tslib@2.5.0:
+    resolution: {integrity: sha512-wXji97I1eANL5PG8RxZ/st+HCwKgAB1uySSxEvVNj3VcOiUyTYTtBYYEK2xhjBGR49+A2/fIJQHvu1ygco2b3Q==}
+    peerDependencies:
+      tslib: '*'
+    dependencies:
+      '@microsoft/applicationinsights-core-js': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-shims': 2.0.2
+      '@microsoft/dynamicproto-js': 1.1.7
+      tslib: 2.5.0
+    dev: false
+
+  /@microsoft/applicationinsights-core-js/2.8.10_tslib@2.5.0:
+    resolution: {integrity: sha512-jQrufDW0+sV8fBhRvzIPNGiCC6dELH+Ug0DM5CfN9757TBqZJz8CSWyDjex39as8+jD0F/8HRU9QdmrVgq5vFg==}
     peerDependencies:
       tslib: '*'
     dependencies:
@@ -2054,25 +2054,25 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@microsoft/applicationinsights-dependencies-js/2.8.9_tslib@2.5.0:
-    resolution: {integrity: sha512-tbssKmuA8I/s09elAvYtkChif3Ary/s9CliriFZ8aQsIM6iLv9Fm9sM2q/gDADO8a4HGuR2a+KahXfqqRdHYKQ==}
+  /@microsoft/applicationinsights-dependencies-js/2.8.10_tslib@2.5.0:
+    resolution: {integrity: sha512-vBsFdQ6yaVfs8Sacw4/QWzlU2lDcXUeSJ2ZHqCuLyyUA4oUgEefEJdr1XMK5O7HCKFKU1kBACuyETu0SN8m+NQ==}
     peerDependencies:
       tslib: '*'
     dependencies:
-      '@microsoft/applicationinsights-common': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-core-js': 2.8.9_tslib@2.5.0
+      '@microsoft/applicationinsights-common': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-core-js': 2.8.10_tslib@2.5.0
       '@microsoft/applicationinsights-shims': 2.0.2
       '@microsoft/dynamicproto-js': 1.1.7
       tslib: 2.5.0
     dev: false
 
-  /@microsoft/applicationinsights-properties-js/2.8.9_tslib@2.5.0:
-    resolution: {integrity: sha512-sBoaEPoyV4d5l192HvuQ5+Juc5fukrOkOM/Ug9LEO1/esVmbdiYmGiLLch0MyWTxBkp9LEtYvcJb0/0t5x1odg==}
+  /@microsoft/applicationinsights-properties-js/2.8.10_tslib@2.5.0:
+    resolution: {integrity: sha512-f7+U4n3RX1qoh0Vt/o7EegYRfMWzfGxYCJDZKB5qxNInqEgoXosGUCc1pZSnk7B4Urc8QJwWn3iQrg2Ib+JMFw==}
     peerDependencies:
       tslib: '*'
     dependencies:
-      '@microsoft/applicationinsights-common': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-core-js': 2.8.9_tslib@2.5.0
+      '@microsoft/applicationinsights-common': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-core-js': 2.8.10_tslib@2.5.0
       '@microsoft/applicationinsights-shims': 2.0.2
       '@microsoft/dynamicproto-js': 1.1.7
       tslib: 2.5.0
@@ -2082,17 +2082,17 @@ packages:
     resolution: {integrity: sha512-PoHEgsnmcqruLNHZ/amACqdJ6YYQpED0KSRe6J7gIJTtpZC1FfFU9b1fmDKDKtFoUSrPzEh1qzO3kmRZP0betg==}
     dev: false
 
-  /@microsoft/applicationinsights-web/2.8.9_tslib@2.5.0:
-    resolution: {integrity: sha512-uyJMNWUMQAehfK1UeAPd3+T5STOeuwty54yfoff12hyF1lWADkV5lEo4ohhMcRhQKdk7AUrhDF4eQnLrm61Mbg==}
+  /@microsoft/applicationinsights-web/2.8.10_tslib@2.5.0:
+    resolution: {integrity: sha512-91FsmjAhDmD+CzwckiW1+dI3U1EgXsPnduGxukIBv2xTIsL1aUfIzW3j2Qmjn8ABblowRkDEpUf7KFnPwRpMSw==}
     peerDependencies:
       tslib: '*'
     dependencies:
-      '@microsoft/applicationinsights-analytics-js': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-channel-js': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-common': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-core-js': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-dependencies-js': 2.8.9_tslib@2.5.0
-      '@microsoft/applicationinsights-properties-js': 2.8.9_tslib@2.5.0
+      '@microsoft/applicationinsights-analytics-js': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-channel-js': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-common': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-core-js': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-dependencies-js': 2.8.10_tslib@2.5.0
+      '@microsoft/applicationinsights-properties-js': 2.8.10_tslib@2.5.0
       '@microsoft/applicationinsights-shims': 2.0.2
       '@microsoft/dynamicproto-js': 1.1.7
       tslib: 2.5.0
@@ -2252,26 +2252,26 @@ packages:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/bonjour/3.5.10:
     resolution: {integrity: sha512-p7ienRMiS41Nu2/igbJxxLDWrSZ0WxM8UQgCeO9KhoVF7cOVFkrKsiDr1EsJIla8vV3oEEjGcz11jc5yimhzZw==}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/connect-history-api-fallback/1.3.5:
     resolution: {integrity: sha512-h8QJa8xSb1WD4fpKBDcATDNGXghFj6/3GRWG6dhmRcu0RX1Ubasur2Uvx5aeEwlf0MwblEC2bMzzMQntxnw/Cw==}
     dependencies:
       '@types/express-serve-static-core': 4.17.32
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/cookie/0.4.1:
@@ -2281,7 +2281,7 @@ packages:
   /@types/cors/2.8.13:
     resolution: {integrity: sha512-RG8AStHlUiV5ysZQKq97copd2UmVYw3/pRMLefISZ3S1hK104Cwm7iLQ3fTKx+lsUH2CE8FlLaYeEA2LSeqYUA==}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/eslint-scope/3.7.4:
@@ -2305,7 +2305,7 @@ packages:
   /@types/express-serve-static-core/4.17.32:
     resolution: {integrity: sha512-aI5h/VOkxOF2Z1saPy0Zsxs5avets/iaiAJYznQFm5By/pamU31xWKL//epiF4OfUA2qTOc9PV6tCUjhO8wlZA==}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
     dev: true
@@ -2322,7 +2322,7 @@ packages:
   /@types/http-proxy/1.17.9:
     resolution: {integrity: sha512-QsbSjA/fSk7xB+UXlCT3wHBy5ai9wOcNDWwZAtud+jXhwOM3l+EYZh8Lng4+/6n8uar0J7xILzqftJdJ/Wdfkw==}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/jasmine/4.3.1:
@@ -2337,8 +2337,8 @@ packages:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
     dev: true
 
-  /@types/node/18.11.19:
-    resolution: {integrity: sha512-YUgMWAQBWLObABqrvx8qKO1enAvBUdjZOAWQ5grBAkp5LQv45jBvYKZ3oFS9iKRCQyFjqw6iuEa1vmFqtxYLZw==}
+  /@types/node/18.13.0:
+    resolution: {integrity: sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==}
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -2366,19 +2366,19 @@ packages:
     resolution: {integrity: sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==}
     dependencies:
       '@types/mime': 3.0.1
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/sockjs/0.3.33:
     resolution: {integrity: sha512-f0KEEe05NvUnat+boPTZ0dgaLZ4SfSouXUgv5noUiefG2ajgKjmETo9ZJyuqsl7dfl2aHlLJUiki6B4ZYldiiw==}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/ws/8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@webassemblyjs/ast/1.11.1:
@@ -3492,7 +3492,7 @@ packages:
     dependencies:
       '@types/cookie': 0.4.1
       '@types/cors': 2.8.13
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
       accepts: 1.3.8
       base64id: 2.0.0
       cookie: 0.4.2
@@ -4446,7 +4446,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
@@ -6461,7 +6461,7 @@ packages:
     hasBin: true
     dev: true
 
-  /ts-node/10.9.1_qqdszkrtcshgbphghj7vnvrrby:
+  /ts-node/10.9.1_4bewfcp2iebiwuold25d6rgcsy:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -6480,7 +6480,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3
